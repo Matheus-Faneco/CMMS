@@ -1,6 +1,7 @@
 from django.db import models
 
 from machine.models import Machine
+from maintenance_worker.models import MaintenanceWorker
 
 
 class Orders(models.Model):
@@ -18,6 +19,11 @@ class Orders(models.Model):
         Machine,
         on_delete=models.CASCADE,
         related_name="maintenance_orders",
+    )
+    fk_maintenance_worker = models.ForeignKey(
+        MaintenanceWorker,
+        on_delete=models.CASCADE,
+        related_name="maintenance_worker"
     )
     order_description = models.CharField(
         max_length=256
