@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('machines', '0001_initial'),
+        ('machine', '0001_initial'),
     ]
 
     operations = [
@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('order_description', models.CharField(max_length=256)),
                 ('order_type', models.CharField(choices=[('P', 'Preventive'), ('C', 'Corrective')], max_length=1)),
                 ('order_status', models.CharField(choices=[('O', 'Open'), ('I', 'In Progress'), ('C', 'Completed')], max_length=1)),
-                ('fk_machine', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='maintenance_orders', to='machines.machine')),
+                ('fk_machine', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='maintenance_orders', to='machine.machine')),
             ],
         ),
     ]

@@ -1,6 +1,6 @@
 from django.db import models
 
-from machines.models import Machine
+from machine.models import Machine
 
 
 class Orders(models.Model):
