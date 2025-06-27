@@ -4,7 +4,7 @@ from django.db import models
 
 class Machine(models.Model):
 
-    STATUS = [
+    MACHINE_STATUS = [
         ('O', 'Operational'),
         ('S', 'Stopped'),
         ('M', 'Maintenance')
@@ -18,7 +18,7 @@ class Machine(models.Model):
     )
     status = models.CharField(
         max_length=20,
-        choices=STATUS,
+        choices=MACHINE_STATUS,
         default="Operational"
     )
 
