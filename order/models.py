@@ -1,6 +1,4 @@
-
 from django.db import models
-
 from machine.models import Machine
 from maintenance_worker.models import MaintenanceWorker
 
