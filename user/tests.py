@@ -1,24 +1,29 @@
 from rest_framework.test import APITestCase
+from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
-from user.models import User
+from .models import User
 
-class MaintenanceWorkerTests(APITestCase):
+class UserAuthTests(APITestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username='user', password='123')
+        self.user = User.objects.create_user(username='A1234', password='senha123')
         refresh = RefreshToken.for_user(self.user)
         self.token = str(refresh.access_token)
-        self.url = '/maintenance_worker/'
 
-    def test_list_requires_auth(self):
-        response = self.client.get(self.url)
-        self.assertEqual(response.status_code, 401)
-
-    def test_create_worker_authenticated(self):
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.token)
+    def test_login_jwt(self):
         data = {
-            "worker_name": "João",
-            "worker_role": "Técnico"
+            "username": "A1234",
+            "password": "123"
         }
-        response = self.client.post(self.url, data)
-        self.assertEqual(response.status_code, 201)
-        self.assertEqual(response.data["worker_name"], "João")
+        response = self.client.post('/api/token/', data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn("access", response.data)
+        self.assertIn("refresh", response.data)
+
+    def test_protected_route_requires_auth(self):
+        response = self.client.get('/order/')
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_access_protected_route_with_token(self):
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.token)
+        response = self.client.get('/order/')
+        self.assertNotEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
