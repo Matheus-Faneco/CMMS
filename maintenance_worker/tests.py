@@ -11,12 +11,12 @@ class MaintenanceWorkerTests(APITestCase):
         self.token = str(refresh.access_token)
         self.url = '/maintenance_worker/'
 
-    # test accessing the endpoint without passing credentials in the header
+    #test accessing the endpoint without passing credentials in the header
     def test_list_requires_auth(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 401)
 
-    # test accessing the endpoint with credentials and creating a worker
+    #test accessing the endpoint with credentials and creating a worker
     def test_create_worker_authenticated(self):
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.token)
         data = {

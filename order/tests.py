@@ -7,6 +7,8 @@ from maintenance_worker.models import MaintenanceWorker
 
 
 class OrdersAPITests(APITestCase):
+
+    #set up by creating a user, machine, worker, and setting the orders endpoint
     def setUp(self):
         self.user = User.objects.create_user(username='M1235', password='123')
         refresh = RefreshToken.for_user(self.user)
@@ -24,15 +26,18 @@ class OrdersAPITests(APITestCase):
         )
         self.url = '/order/'
 
+    #test accessing orders endpoint without passing credentials in the header
     def test_no_auth(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
+    #test accessing orders endpoint with credentials in the header
     def test_get_orders_with_auth(self):
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.access_token)
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    #test creating an order with credentials in the header
     def test_create_order_with_auth(self):
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.access_token)
         data = {
