@@ -1,3 +1,4 @@
+
 from django.db import models
 
 from machine.models import Machine
@@ -5,6 +6,7 @@ from maintenance_worker.models import MaintenanceWorker
 
 
 class Orders(models.Model):
+
     MAINTENANCE_TYPE = [
         ('P', 'Preventive'),
         ('C', 'Corrective')
@@ -36,4 +38,7 @@ class Orders(models.Model):
         max_length=1,
         choices=MAINTENANCE_ORDER_STATUS
     )
+
+
+
 

@@ -5,3 +5,4 @@ class MachineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Machine
         fields = '__all__'
+

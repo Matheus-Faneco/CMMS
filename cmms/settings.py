@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'user',
     'machine',
     'maintenance_worker',
-    'order'
+    'order',
 ]
 
 REST_FRAMEWORK = {
