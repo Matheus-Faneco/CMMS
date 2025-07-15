@@ -9,8 +9,10 @@ Sistema backend para gerenciamento de manutenção industrial, desenvolvido em D
 - Testes automatizados cobrindo os endpoints  
 
 ## Tecnologias
-- Python 
+- Python  
 - Django  
 - Django REST Framework  
+- SimpleJWT  
 - drf-yasg (Swagger / Redoc)  
 - Unittest para testes  
+- Docker  
